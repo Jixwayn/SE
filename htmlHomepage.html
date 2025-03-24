@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบสืบค้นวิทยานิพนธ์ และผลงานสหกิจ</title>
+    <link rel="stylesheet" href="cssHomepage.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="logo-left.png" alt="โลโก้ซ้าย" class="logo">
+        </div>
+        <h1>ระบบสืบค้นวิทยานิพนธ์ และผลงานสหกิจ</h1>
+        <div class="user-icon">
+            <img src="user-icon.png" alt="ไอคอนผู้ใช้">
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="ค้นหา">
+            <button onclick="search()">🔍</button>
+        </div>
+
+        <div class="content-container">
+            <div class="filter-container">
+                <div class="filter-box">
+                    <select id="category">
+                        <option value="">ประเภทหมวดหมู่</option>
+                        <option value="วิทยานิพนธ์">วิทยานิพนธ์</option>
+                        <option value="สหกิจ">สหกิจ</option>
+                        <option value="ผลงาน">ผลงาน</option>
+                    </select>
+                </div>
+                <div class="button-group">
+                    <button onclick="search()">ค้นหา</button>
+                    <button onclick="clearFilter()">ยกเลิก</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
