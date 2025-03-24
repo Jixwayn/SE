@@ -8,22 +8,33 @@
 </head>
 <body>
 
+    <!-- Header -->
     <header>
-        <div class="logo-container">
-            <img src="logo-left.png" alt="โลโก้ซ้าย" class="logo">
-        </div>
-        <h1>ระบบสืบค้นวิทยานิพนธ์ และผลงานสหกิจ</h1>
         <div class="user-icon">
-            <img src="user-icon.png" alt="ไอคอนผู้ใช้">
+            <img src="user.png" alt="ไอคอนผู้ใช้">
         </div>
     </header>
 
+    <!-- Title Bar -->
+    <div class="title-bar">
+        <div class="logo-container">
+            <img src="logocsit.jpeg" alt="โลโก้ซ้าย" class="logo">
+        </div>
+        <h1>ระบบสืบค้นวิทยานิพนธ์ และผลงานสหกิจ</h1>
+    </div>
+
+    <!-- Main Content -->
     <div class="container">
         
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="ค้นหา">
-            <button onclick="search()">🔍</button>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="ค้นหา">
+                <button onclick="search()">🔍</button>
+            </div>
         </div>
+        
+        <!-- แสดงผลการค้นหา -->
+        <div id="searchResults" class="search-results"></div>
 
         <div class="content-container">
             <div class="filter-container">
@@ -36,8 +47,8 @@
                     </select>
                 </div>
                 <div class="button-group">
-                    <button onclick="search()">ค้นหา</button>
-                    <button onclick="clearFilter()">ยกเลิก</button>
+                    <button class="search-btn" onclick="search()">ค้นหา</button>
+                    <button class="cancel-btn" onclick="clearFilter()">ยกเลิก</button>
                 </div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+/* Reset ค่าเริ่มต้น */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -9,33 +10,19 @@ body {
     min-height: 100vh;
 }
 
+/* Header */
 header {
     width: 100%;
     background-color: #d98c6a;
-    color: white;
     padding: 15px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-}
-
-header .logo-container {
-    display: flex;
-    align-items: center;
-}
-
-header .logo {
-    height: 50px;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 24px;
+    justify-content: flex-end;
 }
 
 header .user-icon {
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     border-radius: 50%;
     background-color: white;
     display: flex;
@@ -44,9 +31,40 @@ header .user-icon {
 }
 
 header .user-icon img {
-    height: 25px;
+    height: 30px;
 }
 
+/* Title Bar */
+.title-bar {
+    width: 100%;
+    background-color: #f5d1c2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.title-bar .logo-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.title-bar .logo {
+    height: 80px;
+    width: 80px; /* กำหนดให้เป็นสี่เหลี่ยมจัตุรัส */
+    border-radius: 50%; /* ทำให้เป็นวงกลม */
+    object-fit: cover; /* ป้องกันการบิดเบือนรูปภาพ */
+}
+
+
+.title-bar h1 {
+    margin: 0;
+    font-size: 45px;
+    color: #5a3d31;
+}
+
+/* Container หลัก */
 .container {
     display: flex;
     flex-direction: column;
@@ -57,6 +75,7 @@ header .user-icon img {
     margin-top: 20px;
 }
 
+/* ช่องค้นหา */
 .search-container {
     display: flex;
     width: 100%;
@@ -81,33 +100,66 @@ header .user-icon img {
     background-color: transparent;
 }
 
+/* กรอบ Filter */
 .content-container {
     display: flex;
     width: 100%;
+    justify-content: flex-start; /* จัดตำแหน่งไปทางซ้าย */
+    margin-left: -350px; /* ดันกล่องไปทางซ้ายสุด */
 }
 
+/* กรอบ Filter */
 .filter-container {
-    width: 25%;
+    width: 250px;
+    height: 350px; /* กำหนดความสูงของกรอบ */
     padding: 20px;
     text-align: center;
+    border: 2px solid #828282;
+    border-radius: 10px;
+    background-color: #e4e6ea;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #828282;
+    border-radius: 5px;
+    overflow: hidden; /* ป้องกันการล้นของเนื้อหา */
+    width: 100%;
+    max-width: 800px; /* กำหนดขนาดกรอบ */
+    background: #dbdbdb;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+}
+
+.search-box button {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
 
 .filter-box {
     margin-bottom: 20px;
-}
-
-.filter-container label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
 }
 
 .filter-container select {
     width: 100%;
     padding: 8px;
     border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
+/* ปุ่ม */
 .button-group {
     display: flex;
     justify-content: space-between;
@@ -122,10 +174,10 @@ header .user-icon img {
     cursor: pointer;
 }
 
-.button-group button:first-child {
+.search-btn {
     background-color: #d98c6a;
 }
 
-.button-group button:last-child {
-    background-color: gray;
+.cancel-btn {
+    background-color: rgb(137, 137, 137);
 }
