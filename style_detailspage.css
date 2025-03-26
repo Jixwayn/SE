@@ -20,12 +20,18 @@ body {
   flex-direction: column; /* ทำให้เนื้อหาขยายลง */
   border: 2px solid black;
   box-sizing: border-box;
+  position: relative; /* เพื่อให้ปุ่มย้อนกลับอยู่ภายใน container */
+}
+
+.value {
+  font-size: 18px;
+  color: #000000;
 }
 
 h1 {
   text-align: left;
   color: #000000;
-  font-size: 24px;
+  font-size: 30px;
 }
 
 .info-table {
@@ -51,7 +57,7 @@ h1 {
   background: #f5cbbb;
   padding: 5px 10px;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 16px;
   color: #333;
   border: 2px solid #f73e3e;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
@@ -85,4 +91,45 @@ h1 {
 
 .pdf-button:hover {
   background-color: #c25d3c; /* แก้ไข #s ออก */
+}
+.pdf-button {
+  background-color: #e68361;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-decoration: none; /* เพิ่มบรรทัดนี้เพื่อลบขีดเส้นใต้ */
+}
+
+.pdf-button:hover {
+  background-color: #c25d3c;
+}
+
+.pdf-button:disabled {
+  background-color: #ccc; /* เปลี่ยนสีเมื่อ disabled */
+  cursor: not-allowed;
+}
+
+.back-button {
+  position: absolute;
+  bottom: 20px; /* ระยะห่างจากขอบล่างของ container */
+  right: 20px; /* ระยะห่างจากขอบขวาของ container */
+  padding: 10px;
+}
+
+.back-button-link {
+  background-color: #e68361;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none; /* เอาขีดเส้นใต้ลิงก์ออก */
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.back-button-link:hover {
+  background-color: #c8603d; /* เมื่อเอาเมาส์ไปที่ปุ่ม */
 }
