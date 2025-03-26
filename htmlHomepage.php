@@ -11,19 +11,20 @@ header("Content-Type: text/html; charset=UTF-8");
     <style>
         .search-results {
     margin-top: 20px;
-    display: flex;
+    display: none; /* ซ่อนผลลัพธ์ตอนเริ่มต้น */
     flex-direction: column;
     gap: 15px;
-    position: absolute;  /* ใช้ absolute positioning */
-    top: 280px;           /* ตำแหน่งจากด้านบน */
-    right: 0;            /* ขยับไปทางขวา */
-    width: 1000px;        /* กำหนดความกว้างที่ต้องการ */
+    position: absolute;
+    top: 280px;
+    right: 0;
+    width: 1000px;
     padding: 15px;
-    border: 1px solid #ddd; /* ขอบสีเทาอ่อน */
-    border-radius: 8px; /* ขอบมน */
-    background: #fafafa; /* เพิ่มพื้นหลังอ่อนๆ */
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* เงาเบาๆ */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fafafa;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
+
 
         .result-box {
             background: #ffffff;
@@ -108,24 +109,36 @@ header("Content-Type: text/html; charset=UTF-8");
 
     <script>
         function search() {
-            var query = document.getElementById("searchInput").value;
-            var category = document.getElementById("category").value;
+    var input = document.getElementById("searchInput").value.toLowerCase(); // รับค่าจาก input
+    var category = document.getElementById("category").value; // รับค่าจาก category
+    var resultDiv = document.getElementById("searchResults"); // ผลลัพธ์ที่จะแสดง
 
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "search.php?query=" + query + "&category=" + category, true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById("searchResults").innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        }
+    // ตรวจสอบว่า input มีคำว่า "กล้วยน้ำว้า" หรือไม่
+    if (input.includes("กล้วยน้ำว้า")) {
+        resultDiv.style.display = "block"; // แสดงผลลัพธ์
+    } else {
+        resultDiv.style.display = "none"; // ซ่อนผลลัพธ์
+    }
 
-        function clearFilter() {
-            document.getElementById("searchInput").value = "";
-            document.getElementById("category").value = "";
-            document.getElementById("searchResults").innerHTML = "";
+    // ส่งคำค้นหาไปยัง search.php
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "search.php?query=" + input + "&category=" + category, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            resultDiv.innerHTML = xhr.responseText; // แสดงผลลัพธ์จาก server
+            resultDiv.style.display = 'block'; // แสดงผลลัพธ์
         }
+    };
+    xhr.send();
+}
+
+function clearFilter() {
+    document.getElementById("searchInput").value = "";
+    document.getElementById("category").value = "";
+    document.getElementById("searchResults").innerHTML = "";
+    document.getElementById("searchResults").style.display = 'none'; // ซ่อนผลลัพธ์เมื่อยกเลิก
+}
+
     </script>
 
 </body>
