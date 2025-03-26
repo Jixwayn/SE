@@ -23,6 +23,13 @@ body {
   position: relative; /* เพื่อให้ปุ่มย้อนกลับอยู่ภายใน container */
 }
 
+.label {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+  width: 20%; /* ทำให้ label กว้างขึ้น */
+}
+
 .value {
   font-size: 18px;
   color: #000000;
@@ -37,13 +44,24 @@ h1 {
 .info-table {
   width: 100%;
   border-collapse: collapse;
-  flex-grow: 1; /* ขยายตารางให้พอดี */
+}
+
+.info-table tr {
+  border-bottom: 1px solid #cccccc; /* เส้นคั่นระหว่างแถว */
 }
 
 .info-table td {
   padding: 15px;
   vertical-align: top;
-  border-bottom: 1px solid #cccccc;
+  border-right: 1px solid #cccccc; /* เพิ่มเส้นคั่นระหว่างคอลัมน์ */
+}
+
+.info-table tr:first-child {
+  border-top: 1px solid #cccccc; /* เส้นคั่นที่ด้านบนของแถวแรก */
+}
+
+.info-table td:last-child {
+  border-right: none; /* ลบเส้นขวาสุดออก */
 }
 
 .tags {
@@ -74,7 +92,7 @@ h1 {
 .footer span {
   color: #b993e5; /* เปลี่ยนสีข้อความเป็นม่วง */
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -102,6 +120,7 @@ h1 {
   cursor: pointer;
   transition: background 0.3s;
   text-decoration: none; /* เพิ่มบรรทัดนี้เพื่อลบขีดเส้นใต้ */
+  font-size: 18px;
 }
 
 .pdf-button:hover {
