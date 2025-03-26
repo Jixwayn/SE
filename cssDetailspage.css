@@ -1,0 +1,116 @@
+body {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Inter", sans-serif; /* ใช้ฟอนต์ Inter */
+}
+
+.container {
+  background: #ebebeb;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 950px;
+  height: 650px;
+  text-align: left;
+  position: relative;
+  padding-bottom: 10px;
+  border: 2px solid black; /* เพิ่มเส้นกรอบสีดำ */
+}
+
+h1 {
+  text-align: left;
+  color: #000000;
+  font-size: 32px;
+  font-family: "Inter", sans-serif; /* เพิ่มฟอนต์ Inter */
+}
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.info-table tr {
+  border-bottom: 1px solid #cccccc; /* เส้นคั่นระหว่างแถว */
+}
+
+.info-table td {
+  padding: 15px;
+  vertical-align: top;
+  border-right: 1px solid #cccccc; /* เพิ่มเส้นคั่นระหว่างคอลัมน์ */
+}
+
+.info-table tr:first-child {
+  border-top: 1px solid #cccccc; /* เส้นคั่นที่ด้านบนของแถวแรก */
+}
+
+.info-table td:last-child {
+  border-right: none; /* ลบเส้นขวาสุดออก */
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+  border-right: none; /* ลบเส้นขวาของแท็กออก */
+  font-family: "Inter", sans-serif; /* ใช้ฟอนต์ Inter */
+}
+
+.tag {
+  background: #f5cbbb;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #333;
+  border: 2px solid #f73e3e; /* กรอบสีแท็ก */
+  font-family: "Inter", sans-serif; /* ใช้ฟอนต์ Inter */
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2); /* เพิ่มเงาหลังกรอบ */
+}
+
+.label {
+  font-weight: bold;
+  color: #000000;
+  width: 30%; /* ทำให้ label กว้างขึ้น */
+}
+
+.value {
+  color: #333;
+}
+
+.footer {
+  position: absolute;
+  bottom: 30px; 
+  left: 20px;
+  font-size: 16px;
+  white-space: nowrap; /* ป้องกันข้อความขึ้นบรรทัดใหม่ */
+  display: flex;
+  align-items: center;
+  gap: 5px; /* เว้นระยะระหว่างข้อความกับปุ่ม */
+}
+
+.footer span {
+  color: #b993e5; /* เปลี่ยนสีข้อความเป็นม่วง */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* เพิ่มเงาให้ข้อความ */
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.pdf-button {
+  background-color: #e68361; /* สีปุ่ม */
+  color: white; /* สีตัวอักษร */
+  font-weight: bold;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.pdf-button:hover {
+  background-color: #c25d3c; /* เปลี่ยนสีเมื่อ hover */
+}
