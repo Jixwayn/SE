@@ -4,7 +4,11 @@ include 'username.php';
 $query = isset($_GET['query']) ? $_GET['query'] : "";
 $category = isset($_GET['category']) ? $_GET['category'] : "";
 
-// เริ่มต้นคำสั่ง SQL ที่ค้นหาในหลายคอลัมน์ และเชื่อมตาราง advisor กับ document_advisor และ document
+// ป้องกัน SQL Injection โดยใช้ mysqli_real_escape_string
+$query = $conn->real_escape_string($query);
+$category = $conn->real_escape_string($category);
+
+// สร้างคำสั่ง SQL
 $sql = "SELECT d.*, a.advisor_name
         FROM document d
         LEFT JOIN document_advisor da ON d.document_id = da.document_id
