@@ -91,12 +91,20 @@ header("Content-Type: text/html; charset=UTF-8");
         <div class="content-container">
             <div class="filter-container">
                 <div class="filter-box">
-                    <select id="category" onchange="filterResults()">
-                        <option value="">ประเภทหมวดหมู่</option>
-                        <option value="วิทยานิพนธ์">วิทยานิพนธ์</option>
-                        <option value="สหกิจ">สหกิจ</option>
-                        <option value="ผลงาน">ผลงาน</option>
-                    </select>
+                <select id="category" onchange="search()">
+                    <option value="">ประเภทหมวดหมู่</option>
+                    <?php
+                    include 'username.php';
+                    $sql = "SELECT category_name FROM category"; // ดึงข้อมูลจากฐานข้อมูล
+                    $result = $conn->query($sql);
+                    while ($row = $result->fetch_assoc()) {
+                        $category_name = trim($row['category_name']); // ตัดช่องว่าง
+                        echo '<option value="' . htmlspecialchars($category_name) . '">' . htmlspecialchars($category_name) . '</option>';
+                    }
+                    $conn->close();
+                    ?>
+                </select>
+
                 </div>
                 <div class="button-group">
                     <button class="search-btn" onclick="search()">ค้นหา</button>
@@ -119,7 +127,6 @@ header("Content-Type: text/html; charset=UTF-8");
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     resultDiv.innerHTML = xhr.responseText; // แสดงผลลัพธ์จาก server
                     resultDiv.style.display = 'block'; // แสดงผลลัพธ์
-                    filterResults(input, category); // เรียกใช้ฟังก์ชันกรองข้อมูล
                 }
             };
             xhr.send();
