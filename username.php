@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "123456";
+$password = "123456"; //123456
 $dbname = "se";
 
 // Create connection using Object-Oriented method
