@@ -1,30 +1,55 @@
 <?php
 include 'username.php';
 
-$query = isset($_GET['query']) ? $_GET['query'] : "";
-$category = isset($_GET['category']) ? $_GET['category'] : "";
+$query = isset($_GET['query']) ? trim($_GET['query']) : "";
+$category = isset($_GET['category']) ? trim($_GET['category']) : "";
 
-// ป้องกัน SQL Injection โดยใช้ mysqli_real_escape_string
-$query = $conn->real_escape_string($query);
-$category = $conn->real_escape_string($category);
+// ตรวจสอบการเชื่อมต่อฐานข้อมูล
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-// สร้างคำสั่ง SQL
+// สร้างคำสั่ง SQL เบื้องต้น
 $sql = "SELECT d.*, a.advisor_name
         FROM document d
         LEFT JOIN document_advisor da ON d.document_id = da.document_id
         LEFT JOIN advisor a ON da.advisor_id = a.advisor_id
-        WHERE 
-            (d.document_title LIKE '%$query%' OR 
-             d.document_title_english LIKE '%$query%' OR 
-             d.document_keyword LIKE '%$query%' OR 
-             a.advisor_name LIKE '%$query%')";
+        WHERE 1"; // ใช้ `WHERE 1` เพื่อให้สามารถต่อเงื่อนไขเพิ่มเติมได้ง่าย
 
-if (!empty($category)) {
-    $sql .= " AND d.document_publisher = '$category'";  // กรองตามหมวดหมู่ (ถ้ามี)
+$params = [];
+$types = "";
+
+// ถ้ามีคำค้นหา
+if (!empty($query)) {
+    $sql .= " AND (d.document_title LIKE ? 
+                   OR d.document_title_english LIKE ? 
+                   OR d.document_keyword LIKE ? 
+                   OR a.advisor_name LIKE ?)";
+    $query_param = "%$query%";
+    array_push($params, $query_param, $query_param, $query_param, $query_param);
+    $types .= "ssss";
 }
 
-$result = $conn->query($sql);
+// ถ้ามีหมวดหมู่
+if (!empty($category)) {
+    $sql .= " AND d.document_publisher = ?";
+    array_push($params, $category);
+    $types .= "s";
+}
 
+// Prepare Statement
+$stmt = $conn->prepare($sql);
+
+// ตรวจสอบว่ามีพารามิเตอร์ให้ bind หรือไม่
+if (!empty($params)) {
+    $stmt->bind_param($types, ...$params);
+}
+
+// Execute Query
+$stmt->execute();
+$result = $stmt->get_result();
+
+// แสดงผลลัพธ์
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo '<div class="result-box">';
@@ -40,5 +65,7 @@ if ($result->num_rows > 0) {
     echo "<p>ไม่พบข้อมูล</p>";
 }
 
+// ปิดการเชื่อมต่อ
+$stmt->close();
 $conn->close();
 ?>
