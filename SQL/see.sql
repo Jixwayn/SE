@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2025 at 09:26 AM
+-- Generation Time: Mar 28, 2025 at 11:21 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -95,7 +95,9 @@ INSERT INTO `advisor` (`advisor_id`, `advisor_name`, `advisor_email`, `advisor_t
 (5, 'ผศ.ดร.วินัย วงษ์ไทย', 'winaiw@nu.ac.th', 55963234),
 (6, 'ดร.ณัฐพล คุ้มใหญ่โต', 'nattaponk@nu.ac.th', NULL),
 (7, 'ดร.จรัสศรี รุ่งรัตนาอุบล', 'jaratsrir@nu.ac.th', 55963260),
-(8, 'ดร.ธนะธร พ่อค้า', 'thanathornp@nu.ac.th', NULL);
+(8, 'ดร.ธนะธร พ่อค้า', 'thanathornp@nu.ac.th', NULL),
+(9, 'ดร.วันสุรีย์ มาศกรัม', 'wansureem@nu.ac.th', NULL),
+(10, 'ผศ.ดร.จันทร์จิรา พยัคฆ์เพศ', 'janjirap@nu.ac.th', 55963220);
 
 -- --------------------------------------------------------
 
@@ -135,7 +137,7 @@ CREATE TABLE `document` (
   `document_keyword` varchar(255) DEFAULT NULL,
   `document_publisher` enum('วิทยาการคอมพิวเตอร์','เทคโนโลยีสารสนเทศ') NOT NULL,
   `document_language` enum('ไทย','English') NOT NULL,
-  `document_upload_date` date NOT NULL,
+  `document_upload_date` date NOT NULL DEFAULT current_timestamp(),
   `document_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -144,15 +146,23 @@ CREATE TABLE `document` (
 --
 
 INSERT INTO `document` (`document_id`, `document_title`, `document_title_english`, `document_author`, `document_author_english`, `document_author_secon`, `document_author_secon_english`, `document_description`, `document_keyword`, `document_publisher`, `document_language`, `document_upload_date`, `document_file`) VALUES
-(1, 'การปรับปรุงวิเคราะห์แบบระดับบนโดเมนความถี่ด้วยตัวกรองเกาส์เซียนหลายระดับแบบปรับเหมาะสำหรับการตรวจจับบริเวณที่น่าสนใจของภาพ', ' Modified Scale-Space Analysis in Frequency Domain Based on Adaptive Multiscale Gaussian Filter\r\nfor Saliency Detection', 'เจนจิรา แจ่มศิริ', 'JENJIRA JAEMSIRI', NULL, NULL, ' การตรวจจับบริเวณที่น่าสนใจเป็นกระบวนการที่สำคัญโดยเฉพาะในการค้นหาบริเวณที่สำคัญบนภาพ ซึ่งเป็นที่นิยม ในการประมวลผลภาพ การตรวจจับบริเวณที่น่าสนใจได้รับการปรับปรุงและประยุกต์ใช้งานในหลาย ๆ ด้านของระบบคอมพิวเตอร์ วิทัศน์โดยคอมพิวเตอร์พยายามที่จะทำงาน เข้าใจ', 'ขนาดและพื้นที่ของตัวกรองเกาส์เซียน, ค่าเอนโทรปีแบบท้องถิ่น, การวิเคราะห์แบบระดับ, การตรวจจับบริเวณที่ น่าสนใจ, Scale-and-space Gaussian filter, local entropy, scale- space analysis, saliency detection', 'เทคโนโลยีสารสนเทศ', 'ไทย', '2019-05-16', '61060706.pdf'),
-(2, 'การปรับปรุงเทคนิคการวิเคราะห์องค์ประกอบหลักสำหรับการรู้จำใบหน้า', 'Modified Principal Component Analysis for Face Recognition', 'กังสดาล หาญเชิงชัย', 'KANGSADAN HANCHERNGCHAI', NULL, NULL, 'การวิเคราะห์องค์ประกอบหลักแบบสองมิติ (2DPCA) ถูกใช้อย่างแพร่หลายในหลาย ๆ แอปพลิเคชันโดยเฉพาะการ จดจำใบหน้า ปัจจัยสำคัญในการปรับปรุงประสิทธิภาพของวิธี 2DPCA นั้นมาจากประสิทธิภาพของเมทริกซ์ความแปรปรวนร่วม ใน วิทยานิพนธ์นี้เชื่อว่า ไอเกนเวกเตอร์ (eigenvector', 'เมทริกซ์ระดับภูมิภาค, เทคนิค ELSSP, การวิเคราะห์องค์ประกอบหลัก, การวิเคราะห์องค์ประกอบหลักแบบสองมิติ, (2DPCA), การรู้จำใบหน้า, Regional Matrix, ELSSP Conversion, Principal Component Analysis, Two-dimensional, PCA (2DPCA), Face Recognition', 'วิทยาการคอมพิวเตอร์', 'ไทย', '2021-01-02', '61060355.pdf'),
-(3, 'ระบบถ่ายโอนข้อมูลแบบกึ่งปิด', 'Semi-closed Data Transfer System', 'อนุรักษ์ นันตา', 'Anuruk Nunta', NULL, NULL, 'งานวิจัยนี้ได้พัฒนาระบบถ่ายโอนข้อมูลแบบกึ่งปิดใช้ในการถ่ายโอนข้อมูลจากเครื่องคอมพิวเตอร์ที่ไม่มีการเชื่อมต่อ กับเครื่องอื่นๆ ภายในองค์กร เป็นการลดความเสี่ยงจากการนำสื่อจัดเก็บข้อมูลจากภายนอกเข้ามาเชื่อมต่อ และลดปริมาณการใช้ สื่อจัดเก็บข้อมูลที่เป็นวัสดุสิ', 'ไวรัสคอมพิวเตอร์, ระบบไซเบอร์-กายภาพ, การเข้ารหัส AES, ไฟร์วอลล์, มัลแวร์, Virus computer, CyberPhysical Systems, Advanced Encryption Standard, Firewall, Malware', 'วิทยาการคอมพิวเตอร์', 'ไทย', '2023-10-28', 'AnurukNunta.pdf'),
+(1, 'การปรับปรุงวิเคราะห์แบบระดับบนโดเมนความถี่ด้วยตัวกรองเกาส์เซียนหลายระดับแบบปรับเหมาะสำหรับการตรวจจับบริเวณที่น่าสนใจของภาพ', ' Modified Scale-Space Analysis in Frequency Domain Based on Adaptive Multiscale Gaussian Filter\r\nfor Saliency Detection', 'เจนจิรา แจ่มศิริ', 'JENJIRA JAEMSIRI', NULL, NULL, ' การตรวจจับบริเวณที่น่าสนใจเป็นกระบวนการที่สำคัญโดยเฉพาะในการค้นหาบริเวณที่สำคัญบนภาพ ซึ่งเป็นที่นิยม ในการประมวลผลภาพ การตรวจจับบริเวณที่น่าสนใจได้รับการปรับปรุงและประยุกต์ใช้งานในหลาย ๆ ด้านของระบบคอมพิวเตอร์ วิทัศน์โดยคอมพิวเตอร์พยายามที่จะทำงาน เข้าใจ', 'ขนาดและพื้นที่ของตัวกรองเกาส์เซียน, ค่าเอนโทรปีแบบท้องถิ่น, การวิเคราะห์แบบระดับ, การตรวจจับบริเวณที่ น่าสนใจ, Scale-and-space Gaussian filter, local entropy, scale- space analysis, saliency detection', 'เทคโนโลยีสารสนเทศ', 'ไทย', '2019-05-16', 'Files/61060706.pdf'),
+(2, 'การปรับปรุงเทคนิคการวิเคราะห์องค์ประกอบหลักสำหรับการรู้จำใบหน้า', 'Modified Principal Component Analysis for Face Recognition', 'กังสดาล หาญเชิงชัย', 'KANGSADAN HANCHERNGCHAI', NULL, NULL, 'การวิเคราะห์องค์ประกอบหลักแบบสองมิติ (2DPCA) ถูกใช้อย่างแพร่หลายในหลาย ๆ แอปพลิเคชันโดยเฉพาะการ จดจำใบหน้า ปัจจัยสำคัญในการปรับปรุงประสิทธิภาพของวิธี 2DPCA นั้นมาจากประสิทธิภาพของเมทริกซ์ความแปรปรวนร่วม ใน วิทยานิพนธ์นี้เชื่อว่า ไอเกนเวกเตอร์ (eigenvector', 'เมทริกซ์ระดับภูมิภาค, เทคนิค ELSSP, การวิเคราะห์องค์ประกอบหลัก, การวิเคราะห์องค์ประกอบหลักแบบสองมิติ, (2DPCA), การรู้จำใบหน้า, Regional Matrix, ELSSP Conversion, Principal Component Analysis, Two-dimensional, PCA (2DPCA), Face Recognition', 'วิทยาการคอมพิวเตอร์', 'ไทย', '2021-01-02', 'Files/61060355.pdf'),
+(3, 'ระบบถ่ายโอนข้อมูลแบบกึ่งปิด', 'Semi-closed Data Transfer System', 'อนุรักษ์ นันตา', 'Anuruk Nunta', NULL, NULL, 'งานวิจัยนี้ได้พัฒนาระบบถ่ายโอนข้อมูลแบบกึ่งปิดใช้ในการถ่ายโอนข้อมูลจากเครื่องคอมพิวเตอร์ที่ไม่มีการเชื่อมต่อ กับเครื่องอื่นๆ ภายในองค์กร เป็นการลดความเสี่ยงจากการนำสื่อจัดเก็บข้อมูลจากภายนอกเข้ามาเชื่อมต่อ และลดปริมาณการใช้ สื่อจัดเก็บข้อมูลที่เป็นวัสดุสิ', 'ไวรัสคอมพิวเตอร์, ระบบไซเบอร์-กายภาพ, การเข้ารหัส AES, ไฟร์วอลล์, มัลแวร์, Virus computer, CyberPhysical Systems, Advanced Encryption Standard, Firewall, Malware', 'วิทยาการคอมพิวเตอร์', 'ไทย', '2023-10-28', 'Files/AnurukNunta.pdf'),
 (4, NULL, 'Comparison of Three Learning Approaches for Plant Disease Classification', NULL, 'Mr. Phanthawat Phiphatkamtorn', NULL, NULL, 'Plant disease classification is a critical task in agricultural technology, helping to prevent crop losses and improve overall productivity. Deep learning has become a widely used approach due to its high accuracy in image classification. However, alterna', 'Plant Disease, Machine Learning, Deep Learning, Hybrid Learning, Transfer Learning', 'เทคโนโลยีสารสนเทศ', 'English', '2024-06-18', ''),
 (5, NULL, 'Adaptive Threshold for Tuberculosis Bacilli Detection Using Sputum Smear\r\nImages\r\n', NULL, 'Supakorn Nakvijitpaitoon', NULL, ' Nungruthai Nilsri', 'Tuberculosis (TB) remains a major global health concern, particularly in high-prevalence countries like Thailand. The standard method for TB diagnosis is Acid-Fast Bacilli (AFB) smear microscopy, which involves staining and examining sputum samples under ', 'Tuberculosis Detection, Acid-Fast Bacilli, Adaptive Thresholding, Image Processing, Medical Imaging', 'เทคโนโลยีสารสนเทศ', 'English', '2024-06-23', ''),
 (6, NULL, 'BUILDING SEGMENTATION IN DRONE PHOTOS ACROSS VARIED FLIGHT\r\nALTITUDES USING MASK R-CNN', NULL, ' Kanokwan Khiewwan', NULL, NULL, 'This research proposed a precise altitude-adaptive building segmentation method which employs Mask R-CNN to accurately partition buildings in drone photos taken at various altitudes. We used transfer learning to train our model, starting with a pre-traine', 'Deep learning, Instance segmentation, ResNet, Unmanned aerial vehicle (UAV)', 'เทคโนโลยีสารสนเทศ', 'English', '2024-06-23', ''),
 (7, 'การส่งเสริมการท่องเที่ยวด้วยเทคโนโลยีบล็อกเชน ผ่านวิธีการเพิ่มมูลค่าของสินทรัพย์ดิจิทัลประเภทที่ไม่ สามารถทดแทนกันได้', NULL, 'นางสาวพัทธนันท์ จันทะวงษ์', NULL, 'นางสาววิภาดา วิชระโภชน์ ', NULL, NULL, NULL, 'เทคโนโลยีสารสนเทศ', 'ไทย', '2023-03-23', ''),
 (8, 'ระบบแบบคำขอรับความช่วยเหลือผู้ประสบปัญหาทางสังคม', NULL, 'นาย พันธวัช พิพัฒน์กำธร', NULL, NULL, NULL, NULL, NULL, 'เทคโนโลยีสารสนเทศ', 'ไทย', '2023-03-23', ''),
-(9, 'สติกเกอร์ไลน์ลุงโจนส์เคลื่อนไหว', NULL, 'นาย ภาณุวัฒน์ ศรีสมร', NULL, NULL, NULL, NULL, NULL, 'เทคโนโลยีสารสนเทศ', 'ไทย', '2023-03-23', '');
+(9, 'สติกเกอร์ไลน์ลุงโจนส์เคลื่อนไหว', NULL, 'นาย ภาณุวัฒน์ ศรีสมร', NULL, NULL, NULL, NULL, NULL, 'เทคโนโลยีสารสนเทศ', 'ไทย', '2023-03-23', ''),
+(10, 'การวัดและการปรับปรุงประสิทธิภาพของระบบบันทึกเหตุการณ์บนการประมวลผลแบบกลุ่มเมฆ', 'MEASUREMENT AND IMPROVEMENT OF CLOUD LOGGING  SYSTEMS', 'ไกรยวิชช์ ศุภโสภาพงศ์', 'KRAIYAWICH SUPPASOPAPONG', NULL, NULL, 'งานวิจัยนี้มีวัตถุประสงค์เพื่อที่จะทดสอบประสิทธิภาพของระบบบันทึกเหตุการณ์บนการประมวลผลแบบกลุ่มเมฆหรือคลาวด์และทำการปรับปรุงประสิทธิภาพของระบบบันทึกเหตุการณ์เพื่อให้มีประสิทธิภาพที่ดียิ่งขึ้น โดยระบบบันทึกเหตุการณ์เป็นหนึ่งในวิธีที่สามารถช่วยบรรเทาปัจจัย', 'ระบบรักษาความปลอดภัย, การประมวลผลแบบกลุ่มเมฆ, ระบบบันทึกเหตุการณ์,  การทดสอบประสิทธิภาพ', 'วิทยาการคอมพิวเตอร์', 'ไทย', '2025-03-25', 'Files/58060600.pdf'),
+(11, 'การตรวจจับและรู้จําข้อความเพื่อการทํางานแบบอัตโนมัติในภาคอุตสาหกรรม', 'TEXT DETECTION AND RECOGNITION FOR INDUSTRIAL  AUTOMATION', 'สรวีย์ โพธิ์พยอม', 'SORAWEE POPAYORM', '', '', 'การตรวจจับตัวเลขที่แสดงผลในรูปแบบเจ็ดส่วนบนจอภาพแอลอีดีนั้นมีความท้าทาย\nโดยเฉพาะอย่างยิ่งในการค้นหาตัวเลขท่ามกลางวัตถุที่หลากหลายบนภาพซึ่งอาจมีส่วนประกอบหรือ\nรูปทรงที่คล้ายคลึงกัน ดังนั้น ในงานวิจัยนี้จะนําเสนอวิธีการนําตัวเลขที่แสดงผลในรูปแบบเจ็ดส่วน\n', 'การแปลงเรดอนหลายขนาด, การตรวจจับจอภาพที่แสดงผลใน\nรูปแบบเจ็ดส่วน, การรู้จําตัวเลขที่แสดงผลในรูปแบบเจ็ดส่วน, การ\nเพิ่มข้อมูล, การตัดแบบกําหนดช่วงบนแบบจําลองสีHSV', 'วิทยาการคอมพิวเตอร์', 'ไทย', '2025-03-28', 'Files/61062373.pdf'),
+(12, 'การปรับปรุงวิศวกรรมคุณลักษณะสําหรับตัวจําแนกประเภทแบบต้นไม้สําหรับการตรวจจับการบุกรุกทางเครือข่าย', 'THE MODIFIED FEATURE ENGINEERING APPROACH FOR TREE-BASED CLASSIFIERS OF NETWORK INTRUSION DETECTION', 'กิตติภพ มหาวัน', 'Kittiphop Mahawan', '', '', 'วิทยานิพนธ์ที่นําเสนอเสนอวิธีการปรับปรุงระบบตรวจจับการบุกรุก (IDS) โดยใช้การ\r\nเลือกคุณลักษณะ การสร้างคุณลักษณะพหุนาม และอัลกอริธึมเชิงพันธุกรรม วัตถุประสงค์หลักคือเพื่อ\r\nปรับปรุงความแม่นยําของ IDS ในการตรวจจับและบรรเทาภัยคุกคามทางไซเบอร์วิธีการวิจัย\r\nเกี่', 'ระบบตรวจจับการบุกรุกเครือข่าย, ลักษณนามแบบต้นไม้, วิศวกรรม\r\nคุณลักษณะ, อัลกอริทึมทางพันธุกรรม, การเลือกคุณสมบัติการสร้าง\r\nคุณสมบัติพหุนาม', 'วิทยาการคอมพิวเตอร์', 'ไทย', '2025-03-28', 'Files/KittiphopMahawan.pdf'),
+(13, 'การรู้จำอาหารและการประเมินปริมาณอาหารเหลือด้วยเทคนิคการเรียนรู้เชิงลึก', 'FOOD RECOGNITION AND LEFTOVERS FOOD ESTIMATION  USING DEEP LEARNING TECHNIQUES', 'พลเทพ มีไผ่ขอ', 'Phonthep Meephaikhor', '', '', 'การวิจัยครั้งนี้มีวัตถุประสงค์เพื่อพัฒนาการประเมินปริมาณอาหารเหลือหลังจากการ\r\nรับประทานด้วยเทคนิคการเรียนรู้เชิงลึก ซึ่งผู้วิจัยสร้างแบบจ าลองด้วยเทคนิค Mask R-CNN ที่ได้\r\nพัฒนาเพิ่มเติมวิธีการค านวณพื้นที่ภายในภาพ เพื่อให้สามารถประเมินปริมาณอาหารเหลือได้', 'การเรียนรู้เชิงลึก, การรู้จำอาหาร, อาหารเหลือ, การวิเคราะห์ข้อมูล', 'วิทยาการคอมพิวเตอร์', 'ไทย', '2025-03-28', 'Files/PhonthepMeephaikhor.pdf'),
+(14, 'ระบบตรวจจับและพยากรณ์การรั่วของท่อลมในไลน์การผลิตท่อโดยใช้เทคโนโลยีเอดจ์  คอมพิวติ้งและการเรียนรู้เชิงลึก', 'A SYSTEM FOR DETECTION AND PREDICTION OF LEAKS IN AIR PIPE USING EDGE COMPUTING AND DEEP LEARNING', 'ธนกฤต ไกรสิงห์', 'Thanakrit Kraising', '', '', 'การรั่วซึมของลมเกิดจากชิ้นส่วนของระบบท่อลมในเครื่องจักรที่ใช้ลมในการทํางานเกิด\r\nเสียหายหรือล้มเหลวได้ข้อบกพร่องที่สําคัญนี้เป็นสาเหตุของการสูญเสียประมาณครึ่งหนึ่งของผลผลิต\r\nจากสายการผลิตในภาคการผลิตสิ่งของแต่ละสายงานการผลิต เทคนิคการเรียนรู้เชิงลึกสามารถ\r', 'รั่วซึมของลมอัดอากาศ, การตรวจจับการรั่วซึมของท่อลม, เทคนิคการ\r\nเรียนรู้เชิงลึก, ระบบท่อลม, ต้นไม้การตัดสินใจ, ป่าไม้สุ่ม, เครื่องมือ\r\nเวกเตอร์สนับสนุน, 1D-CNN', 'วิทยาการคอมพิวเตอร์', 'ไทย', '2025-03-28', 'Files/ThanakritKraising.pdf'),
+(15, 'กรอบการวัดประสิทธิภาพการทำงานของระบบบันทึกเหตุการณ์เพื่อบรรเทาภัยคุกคาม ต่อระบบการประมวลผลแบบกลุ่มเมฆประเภทการให้บริการโครงสร้างพื้นฐาน', 'A PERFORMANCE MEASUREMENT FRAMEWORK FOR IAAS LOGGING SYSTEM WITH THREAT MITIGATION', 'ธงรบ อักษร', 'Thongrob Auxsorn', '', '', 'งานวิจัยนี้มีวัตถุประสงค์เพื่อที่เพิ่มความสามารถและเพิ่มประสิทธิภาพการท างานของ\r\nระบบบันทึกเหตุการณ์เพื่อบรรเทาปัจจัยเสี่ยงที่อาจก่อให้เกิดภัยคุกคามต่อระบบการประมวลผล\r\nแบบกลุ่มเมฆประเภทการให้บริการโครงสร้างพื้นฐาน ผู้วิจัยจึงมีแนวคิดในการด าเนินการวิจัย 1', 'ระบบรักษาความปลอดภัย, การประมวลผลแบบกลุ่มเมฆ, ระบบบันทึกเหตุการณ์, การทดสอบประสิทธิภาพ', 'วิทยาการคอมพิวเตอร์', 'ไทย', '2025-03-28', 'Files/ThongrobAuxsorn.pdf'),
+(16, 'การปรับปรุงประสิทธิภาพของระบบบันทึกเหตุการณ์ส าหรับสภาพแวดล้อมของโอเพนส แต็กในระบบการประมวลผลแบบกลุ่มเมฆประเภทการให้บริการโครงสร้างพื้นฐานทางคอมพิวเตอร์', 'LOGGING SYSTEMS PERFORMANCE IMPROVEMENT FOR OPENSTACK ENVIRONMENT IN INFRASTRUCTURE AS A SERVICE CLOUD', 'วิเชพ ใจบุญ', 'Wichep Jaiboon', '', '', 'งานวิจัยนี้มีวัตถุประสงค์เพื่อสร้างต้นแบบและปรับปรุงประสิทธิภาพของระบบบันทึก\r\nเหตุการณ์ส าหรับสภาพแวดล้อมของโอเพนสแต็กในการประมวลผลแบบกลุ่มเมฆประเภทการ\r\nให้บริการโครงสร้างพื้นฐานทางคอมพิวเตอร์เพื่อบรรเทาความเสี่ยงที่เกี่ยวข้องกับภัยคุกคามทาง\r\nไซเบอร์ที่อา', 'ระบบบันทึกเหตุการณ์, การประมวลผลแบบกลุ่มเมฆ, การ\r\nให้บริการโครงสร้างพื้นฐานทางคอมพิวเตอร์, โอเพนสแต็ก', 'วิทยาการคอมพิวเตอร์', 'ไทย', '2025-03-28', 'Files/WichepJaiboon.pdf'),
+(17, 'การประยุกต์ใช้การวิเคราะห์ข้อมูลภาพเชิงวัตถุร่วมกับออนโทโลยีเพื่อวิเคราะห์การใช้ที่ดินในจังหวัดพิษณุโลก', 'APPLYING THE OBJECT-ORIENTED IMAGE ANALYSIS WITH ONTOLOGY TO ANALYZE LAND USE IN PHITSANULOK PROVINCE', 'อรรธพร เลิศอร่ามแสง', 'Uttaporn Lertaramsaeng', '', '', 'การใช้ที่ดินและสิ่งปกคลุมดินมีแนวโน้มการเปลี่ยนแปลงตลอดเวลาและเป็นไปอย่าง\r\nต่อเนื่องโดยเฉพาะการทําแผนที่การใช้ที่ดินและสิ่งปกคลุมดินหรือการติดตามตรวจสอบพื้นที่รวมถึง\r\nการจําแนกประเภทจะต้องได้รับข้อมูลที่ถูกต้องและรวดเร็วถือเป็นสิ่งสําคัญ การได้มาของข้อมูล', 'การใช้ที่ดินและสิ่งปกคลุมดิน, การวิเคราะห์ข้อมูลเชิงวัตถุ, ออนโทโล\r\n\r\nยี, ข้อมูลภาพถ่ายดาวเทียม', 'เทคโนโลยีสารสนเทศ', 'ไทย', '2025-03-28', 'Files/UttapornLertaramsaeng.pdf');
 
 -- --------------------------------------------------------
 
@@ -178,7 +188,15 @@ INSERT INTO `document_advisor` (`advisor_id`, `document_id`) VALUES
 (4, 6),
 (4, 7),
 (5, 8),
-(6, 9);
+(6, 9),
+(5, 10),
+(9, 11),
+(5, 12),
+(2, 13),
+(5, 14),
+(5, 15),
+(5, 16),
+(10, 17);
 
 -- --------------------------------------------------------
 
@@ -204,7 +222,15 @@ INSERT INTO `document_category` (`category_id`, `document_id`) VALUES
 (3, 6),
 (2, 7),
 (2, 8),
-(2, 9);
+(2, 9),
+(1, 10),
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 14),
+(1, 15),
+(1, 16),
+(1, 17);
 
 -- --------------------------------------------------------
 
@@ -290,7 +316,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `advisor`
 --
 ALTER TABLE `advisor`
-  MODIFY `advisor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `advisor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -302,7 +328,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `document`
 --
 ALTER TABLE `document`
-  MODIFY `document_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `document_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user`
