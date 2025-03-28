@@ -137,9 +137,11 @@ CREATE TABLE `document` (
   `document_keyword` varchar(255) DEFAULT NULL,
   `document_publisher` enum('วิทยาการคอมพิวเตอร์','เทคโนโลยีสารสนเทศ') NOT NULL,
   `document_language` enum('ไทย','English') NOT NULL,
-  `document_upload_date` date NOT NULL DEFAULT current_timestamp(),
-  `document_file` varchar(255) NOT NULL
+  `document_upload_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `document_file` varchar(255) NOT NULL,
+  PRIMARY KEY (`document_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
 
 --
 -- Dumping data for table `document`

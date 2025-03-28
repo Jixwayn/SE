@@ -54,23 +54,22 @@ if (!empty($sql)) {
     $result = $stmt->get_result();
 
     // แสดงผลลัพธ์
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo '<div class="result-box">';
-                echo '<strong>ชื่อเอกสาร:</strong> ' . htmlspecialchars($row['document_title']) . '<br>';
-                echo '<strong>ชื่อเอกสาร (ภาษาอังกฤษ):</strong> ' . htmlspecialchars($row['document_title_english']) . '<br>';
-                echo '<strong>ชื่ออาจารย์ที่ปรึกษา:</strong> ' . htmlspecialchars($row['advisor_name']) . '<br>';
-                echo '<strong>หมวดหมู่:</strong> ' . htmlspecialchars($row['category_name']) . '<br>';
-                echo '<strong>วันที่อัปโหลด:</strong> ' . htmlspecialchars($row['document_upload_date']) . '<br>';
-                echo '<button class="btn-detail" onclick="window.location.href=\'Detailspage.php?id=' . $row['document_id'] . '\'">ดูรายละเอียด</button>';
-                echo '</div>';
-            }
-        } else {
-            echo "<p>ไม่พบข้อมูล</p>";
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<div class="result-box">';
+            echo '<strong>ชื่อเอกสาร:</strong> ' . htmlspecialchars($row['document_title']) . '<br>';
+            echo '<strong>ชื่อเอกสาร (ภาษาอังกฤษ):</strong> ' . htmlspecialchars($row['document_title_english']) . '<br>';
+            echo '<strong>ชื่ออาจารย์ที่ปรึกษา:</strong> ' . htmlspecialchars($row['advisor_name']) . '<br>';
+            echo '<strong>หมวดหมู่:</strong> ' . htmlspecialchars($row['category_name']) . '<br>';
+            echo '<strong>วันที่อัปโหลด:</strong> ' . htmlspecialchars($row['document_upload_date']) . '<br>';
+            echo '<button class="btn-detail" onclick="window.location.href=\'Detailspage.php?id=' . $row['document_id'] . '\'">ดูรายละเอียด</button>';
+            echo '</div>';
         }
+    } else {
+        echo "<p>ไม่พบข้อมูล</p>";
     }
+}
 
-    $stmt->close();
-
+$stmt->close();
 $conn->close();
 ?>
