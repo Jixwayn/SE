@@ -103,12 +103,6 @@ $result = mysqli_query($conn, $query);
 
 
             <button type="submit" id="tbtn">เพิ่มเอกสาร</button>
-
-            <!-- เพิ่ม div นี้ในส่วนของ body ใน admin.php -->
-            <div id="uploadMessage" style="display:none; padding: 10px; background-color: #4CAF50; color: white; margin-top: 10px; text-align: center;">
-                อัปโหลดสมบูรณ์แล้ว!
-            </div>
-
         </form>
     </section>
 
