@@ -1,6 +1,11 @@
 <?php
 include 'username.php';
 
+// ดึงรายชื่ออาจารย์ที่ปรึกษาจากตาราง advisor
+$query = "SELECT advisor_id, advisor_name FROM advisor";
+$result = mysqli_query($conn, $query);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -45,10 +50,33 @@ include 'username.php';
             <input type="text" id="document_author_english" name="document_author_english" placeholder="กรอกชื่อผู้จัดทำภาษาอังกฤษ" required>
 
             <label for="document_author_secon">ชื่อผู้จัดทำคนที่ 2 :</label>
-            <input type="text" id="document_author_secon" name="document_author_secon" placeholder="กรอกชื่อผู้จัดทำภาษาไทย" required>
+            <input type="text" id="document_author_secon" name="document_author_secon" placeholder="กรอกชื่อผู้จัดทำภาษาไทย">
 
             <label for="document_author_secon_english">ชื่อผู้จัดทำคนที่ 2 (ภาษาอังกฤษ):</label>
-            <input type="text" id="document_author_secon_english" name="document_author_secon_english" placeholder="กรอกชื่อผู้จัดทำภาษาอังกฤษ" required>
+            <input type="text" id="document_author_secon_english" name="document_author_secon_english" placeholder="กรอกชื่อผู้จัดทำภาษาอังกฤษ">
+
+            <label for="document_advisor">อาจารย์ที่ปรึกษา:</label>
+            <select id="document_advisor" name="document_advisor" required>
+                <option value="" selected hidden>เลือกอาจารย์ที่ปรึกษา</option>
+                <?php
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<option value="' . $row["advisor_id"] . '">' . $row["advisor_name"] . '</option>';
+                }
+                ?>
+            </select>
+
+            <label for="document_category">ประเภทเอกสาร:</label>
+            <select id="document_category" name="document_category" required>
+                <option value="" selected hidden>เลือกประเภทเอกสาร</option>
+                <?php
+                // ดึงข้อมูลประเภทเอกสารจากฐานข้อมูล
+                $query_category = "SELECT * FROM category";
+                $result_category = mysqli_query($conn, $query_category);
+                while ($row = mysqli_fetch_assoc($result_category)) {
+                    echo "<option value='" . $row['category_id'] . "'>" . $row['category_name'] . "</option>";
+                }
+                ?>
+            </select>
 
             <label for="document_description">คำอธิบายเอกสาร:</label>
             <textarea id="document_description" name="document_description" placeholder="กรอกคำอธิบายเอกสาร" required></textarea>
@@ -59,15 +87,15 @@ include 'username.php';
             <label for="document_publisher">สาขาวิชา:</label>
             <select id="document_publisher" name="document_publisher" required>
                 <option value="" selected hidden>เลือกสาขาวิชา</option>
-                <option value="computer_science">วิทยาการคอมพิวเตอร์</option>
-                <option value="information_technology">เทคโนโลยีสารสนเทศ</option>
+                <option value="วิทยาการคอมพิวเตอร์">วิทยาการคอมพิวเตอร์</option>
+                <option value="เทคโนโลยีสารสนเทศ">เทคโนโลยีสารสนเทศ</option>
             </select>
 
             <label for="document_language">ภาษาที่ใช้ภายในเอกสาร:</label>
             <select id="document_language" name="document_language" required>
                 <option value="" selected hidden>เลือกภาษาที่ใช้ภายในเอกสาร</option>
-                <option value="thai">ไทย</option>
-                <option value="english">English</option>
+                <option value="ไทย">ไทย</option>
+                <option value="English">English</option>
             </select>
 
             <label for="document_file" class="file-upload-btn">เลือกไฟล์ (PDF)</label>
@@ -111,22 +139,31 @@ include 'username.php';
         fetch_order_equipment(formData);
     });
 
-    const fetch_order_equipment = function(formData) {
+    document.getElementById("tbtn").addEventListener("click", function(event) {
+        event.preventDefault(); // ป้องกันการรีเฟรชหน้า
+
+        let formData = new FormData(document.querySelector("form")); // ดึงข้อมูลจากฟอร์มทั้งหมด
+
         fetch('insert.php', {
                 method: 'POST',
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8"
-                },
-                body: JSON.stringify(formData) // ส่งข้อมูลไปในรูปแบบ JSON
+                body: formData // ส่งข้อมูลเป็น FormData
             })
-            .then(response => response.text()) // รับข้อมูลจาก PHP
+            .then(response => response.text())
             .then(data => {
-                console.log("Response from PHP:", data); // แสดงข้อมูลที่ได้รับจาก PHP
+                console.log("Response from PHP:", data);
+
+                // ตรวจสอบคำตอบจาก PHP ว่าอัปโหลดสำเร็จหรือไม่
+                if (data.includes("อัปโหลดสมบูรณ์แล้ว")) {
+                    alert("อัปโหลดสมบูรณ์แล้ว!"); // แสดงข้อความแจ้งเตือน
+                } else {
+                    alert("เกิดข้อผิดพลาดในการอัปโหลด"); // แสดงข้อความแจ้งเตือนถ้ามีข้อผิดพลาด
+                }
             })
             .catch(error => {
-                console.error('Error:', error); // หากเกิดข้อผิดพลาด
+                console.error('Error:', error);
+                alert("เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์");
             });
-    }
+    });
 </script>
 
 </html>

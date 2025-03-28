@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 $sql = "SELECT d.*, c.category_name, a.advisor_name
         FROM document d
         LEFT JOIN document_category dc ON d.document_id = dc.document_id
-        LEFT JOIN category c ON dc.categoty_id = c.categoty_id
+        LEFT JOIN category c ON dc.category_id = c.category_id
         LEFT JOIN document_advisor da ON d.document_id = da.document_id
         LEFT JOIN advisor a ON da.advisor_id = a.advisor_id
         WHERE 1=1";  // เพิ่ม WHERE 1=1 เพื่อให้ง่ายในการใช้ AND สำหรับเงื่อนไข

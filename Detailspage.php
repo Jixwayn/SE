@@ -83,7 +83,7 @@ $is_thesis = ($row['category_name'] == 'วิทยานิพนธ์');
                 <span>Digital file</span>
                 <?php if ($is_thesis && !empty($row['document_file'])): ?>
                     <!-- ถ้าเป็นวิทยานิพนธ์และมีไฟล์ PDF ให้แสดงปุ่มที่จะเปิดไฟล์ PDF -->
-                    <a href="files/<?php echo $row['document_file']; ?>" target="_blank" class="pdf-button"> .PDF</a>
+                    <a href="<?php echo $row['document_file']; ?>" target="_blank" class="pdf-button"> .PDF</a>
                 <?php else: ?>
                     <!-- ถ้าไม่ใช่วิทยานิพนธ์ หรือไม่มีไฟล์ PDF จะแสดงปุ่ม disabled -->
                     <button class="pdf-button" disabled>Not available</button>
