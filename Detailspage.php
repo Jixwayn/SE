@@ -50,11 +50,26 @@ $is_thesis = ($row['category_name'] == 'วิทยานิพนธ์');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document Details</title>
-    <link rel="stylesheet" href="style_detailspage.css">
+    <link rel="stylesheet" href="details.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <!-- Header -->
+    <header>
+        <div class="user-icon">
+            <img src="user.png" alt="ไอคอนผู้ใช้">
+        </div>
+    </header>
+
+    <!-- Title Bar -->
+    <div class="title-bar">
+        <div class="logo-container">
+            <img src="logocsit.jpeg" alt="โลโก้ซ้าย" class="logo">
+        </div>
+        <h1>ระบบสืบค้นวิทยานิพนธ์ และผลงานสหกิจ</h1>
+    </div>
+
     <div class="container">
         <h1 style="font-family: 'Inter', sans-serif;"><?= htmlspecialchars($row['document_title']) ?></h1>
         <div class="info-box">
@@ -106,7 +121,6 @@ $is_thesis = ($row['category_name'] == 'วิทยานิพนธ์');
             <div class="footer">
                 <span>Digital file</span>
                 <?php if ($is_thesis && !empty($row['document_file'])): ?>
-                    <a href="files/<?= urlencode($row['document_file']) ?>" target="_blank" class="pdf-button"> .PDF</a>
                     <!-- ถ้าเป็นวิทยานิพนธ์และมีไฟล์ PDF ให้แสดงปุ่มที่จะเปิดไฟล์ PDF -->
                     <a href="<?php echo $row['document_file']; ?>" target="_blank" class="pdf-button"> .PDF</a>
                 <?php else: ?>
