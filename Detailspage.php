@@ -17,7 +17,7 @@ if ($ids <= 0) {
 $document_sql = "SELECT document.*, category.category_name
                  FROM document
                  JOIN document_category ON document.document_id = document_category.document_id
-                 JOIN category ON document_category.categoty_id = category.categoty_id
+                 JOIN category ON document_category.category_id = category.category_id
                  WHERE document.document_id = '$ids'";
 
 // Debug SQL
