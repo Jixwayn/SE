@@ -62,7 +62,7 @@ if (!empty($sql)) {
                 echo '<strong>ชื่ออาจารย์ที่ปรึกษา:</strong> ' . htmlspecialchars($row['advisor_name']) . '<br>';
                 echo '<strong>หมวดหมู่:</strong> ' . htmlspecialchars($row['category_name']) . '<br>';
                 echo '<strong>วันที่อัปโหลด:</strong> ' . htmlspecialchars($row['document_upload_date']) . '<br>';
-                echo '<button class="btn-detail" onclick="alert(\'ดูรายละเอียดของ ' . htmlspecialchars($row['document_title']) . '\')">ดูรายละเอียด</button>';
+                echo '<button class="btn-detail" onclick="window.location.href=\'Detailspage.php?id=' . $row['document_id'] . '\'">ดูรายละเอียด</button>';
                 echo '</div>';
             }
         } else {
