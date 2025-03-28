@@ -50,10 +50,10 @@ $result = mysqli_query($conn, $query);
             <input type="text" id="document_author_english" name="document_author_english" placeholder="กรอกชื่อผู้จัดทำภาษาอังกฤษ" required>
 
             <label for="document_author_secon">ชื่อผู้จัดทำคนที่ 2 :</label>
-            <input type="text" id="document_author_secon" name="document_author_secon" placeholder="กรอกชื่อผู้จัดทำภาษาไทย">
+            <input type="text" id="document_author_secon" name="document_author_secon" placeholder="กรอกชื่อผู้จัดทำภาษาไทย" required>
 
             <label for="document_author_secon_english">ชื่อผู้จัดทำคนที่ 2 (ภาษาอังกฤษ):</label>
-            <input type="text" id="document_author_secon_english" name="document_author_secon_english" placeholder="กรอกชื่อผู้จัดทำภาษาอังกฤษ">
+            <input type="text" id="document_author_secon_english" name="document_author_secon_english" placeholder="กรอกชื่อผู้จัดทำภาษาอังกฤษ" required>
 
             <label for="document_advisor">อาจารย์ที่ปรึกษา:</label>
             <select id="document_advisor" name="document_advisor" required>
@@ -103,6 +103,12 @@ $result = mysqli_query($conn, $query);
 
 
             <button type="submit" id="tbtn">เพิ่มเอกสาร</button>
+
+            <!-- เพิ่ม div นี้ในส่วนของ body ใน admin.php -->
+            <div id="uploadMessage" style="display:none; padding: 10px; background-color: #4CAF50; color: white; margin-top: 10px; text-align: center;">
+                อัปโหลดสมบูรณ์แล้ว!
+            </div>
+
         </form>
     </section>
 
@@ -134,9 +140,6 @@ $result = mysqli_query($conn, $query);
             "document_publisher": document_publisher,
             "document_language": document_language
         };
-
-        // ส่งข้อมูลไปยัง PHP
-        fetch_order_equipment(formData);
     });
 
     document.getElementById("tbtn").addEventListener("click", function(event) {
@@ -150,15 +153,16 @@ $result = mysqli_query($conn, $query);
             })
             .then(response => response.text())
             .then(data => {
-                console.log("Response from PHP:", data);
+                console.log("Response from PHP:", data); // แสดงคำตอบจาก PHP
 
                 // ตรวจสอบคำตอบจาก PHP ว่าอัปโหลดสำเร็จหรือไม่
-                if (data.includes("อัปโหลดสมบูรณ์แล้ว")) {
+                if (data.trim() === "อัปโหลดสมบูรณ์แล้ว") {
                     alert("อัปโหลดสมบูรณ์แล้ว!"); // แสดงข้อความแจ้งเตือน
                 } else {
-                    alert("เกิดข้อผิดพลาดในการอัปโหลด"); // แสดงข้อความแจ้งเตือนถ้ามีข้อผิดพลาด
+                    console.log("ไม่พบข้อความ 'อัปโหลดสมบูรณ์แล้ว'");
                 }
             })
+
             .catch(error => {
                 console.error('Error:', error);
                 alert("เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์");
