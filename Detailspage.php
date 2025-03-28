@@ -24,12 +24,26 @@ $is_thesis = ($row['category_name'] == 'วิทยานิพนธ์');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document Details</title>
-    <link rel="stylesheet" href="style_detailspage.css">
+    <link rel="stylesheet" href="details.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-</head>
 </head>
 
 <body>
+    <!-- Header -->
+    <header>
+        <div class="user-icon">
+            <img src="user.png" alt="ไอคอนผู้ใช้">
+        </div>
+    </header>
+
+    <!-- Title Bar -->
+    <div class="title-bar">
+        <div class="logo-container">
+            <img src="logocsit.jpeg" alt="โลโก้ซ้าย" class="logo">
+        </div>
+        <h1>ระบบสืบค้นวิทยานิพนธ์ และผลงานสหกิจ</h1>
+    </div>
+
     <div class="container">
         <h1 style="font-family: 'Inter', sans-serif;"><?= $row['document_title'] ?></h1>
         <div class="info-box">
